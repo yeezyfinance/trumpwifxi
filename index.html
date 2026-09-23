@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>$TRUMPWIFXI</title>
+  <meta name="description" content="$TRUMPWIFXI on Solana. Trump–Xi meeting coin on StonkFun, paired with Zcash." />
+  <link rel="icon" href="logo.png" />
+  <script src="https://unpkg.com/@solana/web3.js@1.98.0/lib/index.iife.min.js"></script>
+  <style>
+    :root {
+      --paper: #0d1118;
+      --paper2: #161b25;
+      --ink: #f4f1ea;
+      --mute: #b7b3aa;
+      --line: rgba(212, 175, 55, 0.28);
+      --gold: #d4af37;
+      --gold2: #f0d56a;
+      --navy: #1b2a4a;
+      --red: #c41e3a;
+      --ok: #6fbf88;
+      --bad: #ff8a7a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      background:
+        linear-gradient(90deg, #1b2a4a 0 50%, #8b1515 50% 100%);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background: rgba(8,10,16,.55);
+      pointer-events: none;
+    }
+    a { color: var(--gold2); }
+    .wrap { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 36px 20px 80px; }
+    header { text-align: center; }
+    header img {
+      width: min(280px, 78vw);
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 2px solid var(--gold);
+      background: #000;
+    }
+    .eyebrow {
+      margin-top: 22px;
+      letter-spacing: .2em;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--gold2);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+    h1 {
+      font-size: clamp(36px, 8vw, 64px);
+      letter-spacing: -.03em;
+      margin-top: 6px;
+      color: #fff;
+    }
+    .sub { color: var(--mute); max-width: 460px; margin: 10px auto 0; }
+    .ca {
+      margin: 16px auto 0;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: var(--mute);
+      word-break: break-all;
+      max-width: 560px;
+    }
+    .row {
+      display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+      margin-top: 18px;
+    }
+    button, .btn {
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .gold { background: var(--gold); color: #1a160e; }
+    .navy { background: var(--red); color: #fff; }
+    .ghost { background: transparent; border-color: var(--gold); color: var(--ink); }
+    .trade {
+      margin: 28px auto 0;
+      max-width: 420px;
+      background: var(--paper2);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      text-align: left;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+    .trade h2 { font-size: 15px; margin-bottom: 12px; color: var(--navy); }
+    label { display: block; font-size: 12px; color: var(--mute); margin: 10px 0 6px; }
+    input, select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      font: inherit;
+      color: var(--ink);
+    }
+    .trade .row { justify-content: stretch; margin-top: 14px; }
+    .trade .row button { flex: 1; }
+    .status { margin-top: 12px; font-size: 13px; color: var(--mute); min-height: 1.3em; }
+    .status.ok { color: var(--ok); }
+    .status.bad { color: var(--bad); }
+    section {
+      margin-top: 16px;
+      background: var(--paper2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px 22px;
+    }
+    h3 { font-size: 18px; color: var(--navy); margin-bottom: 8px; }
+    ul { margin-left: 18px; }
+    li { margin: 6px 0; }
+    .fine { font-size: 13px; color: var(--mute); }
+    footer { text-align: center; margin-top: 28px; color: var(--mute); font-size: 12px; font-family: ui-sans-serif, system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="logo.png" alt="$TRUMPWIFXI" />
+      <div class="eyebrow">Solana · StonkFun · Zcash pair</div>
+      <h1>$TRUMPWIFXI</h1>
+      <p class="sub">Trump and Xi meet in Washington. This is the handshake coin — holders drip ZEC, the deploy wallet takes the pool cut.</p>
+      <div class="ca" id="ca">Loading contract…</div>
+      <div class="row">
+        <button class="gold" type="button" id="copy">Copy contract</button>
+        <a class="navy btn" id="stonk" href="https://stonkfun.xyz" target="_blank" rel="noopener">Open StonkFun</a>
+        <a class="ghost btn" href="https://jup.ag" target="_blank" rel="noopener">Jupiter</a>
+      </div>
+    </header>
+
+    <div class="trade">
+      <h2>Trade from this page</h2>
+      <p class="fine" id="walletLine">Connect Phantom or Solflare. Buys route through Jupiter when a market exists. If the coin is still on the StonkFun curve, Jupiter may have no route — use StonkFun until it graduates.</p>
+      <div class="row">
+        <button class="navy" type="button" id="connect">Connect wallet</button>
+        <button class="ghost" type="button" id="disconnect" hidden>Disconnect</button>
+      </div>
+      <label for="side">Side</label>
+      <select id="side">
+        <option value="buy">Buy $TRUMPWIFXI with SOL</option>
+        <option value="sell">Sell $TRUMPWIFXI for SOL</option>
+      </select>
+      <label for="amount" id="amountLabel">Amount in SOL</label>
+      <input id="amount" type="number" min="0" step="0.01" value="0.1" />
+      <div class="row">
+        <button class="gold" type="button" id="quoteBtn">Get quote</button>
+        <button class="navy" type="button" id="swapBtn" disabled>Swap</button>
+      </div>
+      <div class="status" id="status"></div>
+    </div>
+
+    <section>
+      <h3>The meeting</h3>
+      <p>September 24, 2026. Washington. A state visit built around a thin trade truce. $TRUMPWIFXI is a meme on that day, not a whitepaper.</p>
+    </section>
+    <section>
+      <h3>The coin</h3>
+      <ul>
+        <li>Ticker <strong>$TRUMPWIFXI</strong> on Solana</li>
+        <li>StonkFun Reward token, quoted against <strong>ZEC</strong></li>
+        <li>1% transfer tax paid to holders in Zcash</li>
+        <li>Creator earns about 0.5% of every trade in ZEC</li>
+        <li>Fair launch. No dev buy. LP locks at 85 SOL raised</li>
+      </ul>
+    </section>
+    <section>
+      <p class="fine">Meme. No intrinsic value. Not affiliated with any government, party, StonkFun, Jupiter, or the Zcash Foundation. You sign every transaction in your own wallet. You can lose everything.</p>
+    </section>
+    <footer>$TRUMPWIFXI</footer>
+  </div>
+
+  <script>
+    const SOL = "So11111111111111111111111111111111111111112";
+    const DEC_SOL = 9;
+    const DEC_TOKEN = 6;
+    const SLIP = 150;
+
+    const $ = (id) => document.getElementById(id);
+    const caEl = $("ca");
+    const statusEl = $("status");
+    const connectBtn = $("connect");
+    const disconnectBtn = $("disconnect");
+    const swapBtn = $("swapBtn");
+    const quoteBtn = $("quoteBtn");
+    const amountEl = $("amount");
+    const sideEl = $("side");
+    const amountLabel = $("amountLabel");
+    const walletLine = $("walletLine");
+    const stonkLink = $("stonk");
+
+    let mint = "";
+    let pubkey = null;
+    let lastQuote = null;
+
+    function setStatus(msg, kind) {
+      statusEl.textContent = msg || "";
+      statusEl.className = "status" + (kind ? " " + kind : "");
+    }
+    function provider() {
+      if (window.solana && window.solana.isPhantom) return window.solana;
+      if (window.solflare) return window.solflare;
+      if (window.solana) return window.solana;
+      return null;
+    }
+    function b64ToBytes(b64) {
+      const bin = atob(b64);
+      const out = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+      return out;
+    }
+    function short(k) {
+      return k.slice(0, 4) + "…" + k.slice(-4);
+    }
+
+    fetch("ca.txt").then((r) => (r.ok ? r.text() : "")).then((t) => {
+      mint = (t || "").trim();
+      caEl.textContent = mint || "CA coming — put the mint in ca.txt";
+      if (mint) {
+        stonkLink.href = "https://stonkfun.xyz/" + encodeURIComponent(mint);
+      }
+    }).catch(() => {
+      caEl.textContent = "CA coming — put the mint in ca.txt";
+    });
+
+    $("copy").onclick = () => {
+      if (!mint) return;
+      navigator.clipboard.writeText(mint);
+      $("copy").textContent = "Copied";
+      setTimeout(() => ($("copy").textContent = "Copy contract"), 1200);
+    };
+
+    sideEl.onchange = () => {
+      amountLabel.textContent = sideEl.value === "buy" ? "Amount in SOL" : "Amount in $TRUMPWIFXI";
+      lastQuote = null;
+      swapBtn.disabled = true;
+    };
+
+    connectBtn.onclick = async () => {
+      const p = provider();
+      if (!p) {
+        setStatus("Install Phantom or Solflare, then refresh.", "bad");
+        return;
+      }
+      try {
+        const res = await p.connect();
+        pubkey = (res && res.publicKey ? res.publicKey : p.publicKey).toString();
+        connectBtn.textContent = short(pubkey);
+        disconnectBtn.hidden = false;
+        walletLine.textContent = "Connected " + short(pubkey);
+        setStatus("Wallet connected.", "ok");
+      } catch (e) {
+        setStatus(e.message || "Connect cancelled.", "bad");
+      }
+    };
+
+    disconnectBtn.onclick = async () => {
+      const p = provider();
+      try { if (p && p.disconnect) await p.disconnect(); } catch (_) {}
+      pubkey = null;
+      lastQuote = null;
+      connectBtn.textContent = "Connect wallet";
+      disconnectBtn.hidden = true;
+      swapBtn.disabled = true;
+      walletLine.textContent = "Disconnected.";
+      setStatus("");
+    };
+
+    async function jupQuote() {
+      if (!mint) throw new Error("No mint in ca.txt yet.");
+      const buy = sideEl.value === "buy";
+      const raw = Number(amountEl.value);
+      if (!raw || raw <= 0) throw new Error("Enter an amount.");
+      const amount = buy
+        ? Math.round(raw * 10 ** DEC_SOL)
+        : Math.round(raw * 10 ** DEC_TOKEN);
+      const inputMint = buy ? SOL : mint;
+      const outputMint = buy ? mint : SOL;
+      const url =
+        "https://lite-api.jup.ag/swap/v1/quote?inputMint=" + inputMint +
+        "&outputMint=" + outputMint +
+        "&amount=" + amount +
+        "&slippageBps=" + SLIP +
+        "&restrictIntermediateTokens=true";
+      const r = await fetch(url);
+      const data = await r.json();
+      if (!r.ok || data.error || !data.outAmount) {
+        throw new Error(data.error || "No Jupiter route. Trade on StonkFun until this coin graduates.");
+      }
+      return data;
+    }
+
+    quoteBtn.onclick = async () => {
+      setStatus("Fetching quote…");
+      swapBtn.disabled = true;
+      lastQuote = null;
+      try {
+        const q = await jupQuote();
+        lastQuote = q;
+        const buy = sideEl.value === "buy";
+        const out = Number(q.outAmount) / (buy ? 10 ** DEC_TOKEN : 10 ** DEC_SOL);
+        const unit = buy ? "$TRUMPWIFXI" : "SOL";
+        setStatus("Quote: you receive about " + out.toLocaleString(undefined, { maximumFractionDigits: 6 }) + " " + unit + ". Confirm in wallet to swap.", "ok");
+        swapBtn.disabled = !pubkey;
+        if (!pubkey) setStatus("Quote ready. Connect a wallet to swap.", "ok");
+      } catch (e) {
+        setStatus(e.message, "bad");
+      }
+    };
+
+    swapBtn.onclick = async () => {
+      const p = provider();
+      if (!p || !pubkey) {
+        setStatus("Connect a wallet first.", "bad");
+        return;
+      }
+      if (!lastQuote) {
+        setStatus("Get a quote first.", "bad");
+        return;
+      }
+      setStatus("Building swap…");
+      try {
+        const r = await fetch("https://lite-api.jup.ag/swap/v1/swap", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            quoteResponse: lastQuote,
+            userPublicKey: pubkey,
+            wrapAndUnwrapSol: true,
+            dynamicComputeUnitLimit: true,
+            prioritizationFeeLamports: "auto"
+          })
+        });
+        const data = await r.json();
+        if (!data.swapTransaction) throw new Error(data.error || "Jupiter did not return a transaction.");
+        const vtx = solanaWeb3.VersionedTransaction.deserialize(b64ToBytes(data.swapTransaction));
+        setStatus("Approve in your wallet…");
+        const sig = await p.signAndSendTransaction(vtx);
+        const id = typeof sig === "string" ? sig : (sig && (sig.signature || sig));
+        setStatus("Sent " + (id ? String(id).slice(0, 16) + "…" : "tx") + ". Check your wallet.", "ok");
+        lastQuote = null;
+        swapBtn.disabled = true;
+      } catch (e) {
+        setStatus(e.message || "Swap failed.", "bad");
+      }
+    };
+  </script>
+</body>
+</html>
